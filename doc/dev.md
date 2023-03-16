@@ -1,6 +1,71 @@
-- @bug getOwner | runWithOwner | https://www.solidjs.com/docs/latest/api#createuniqueid
+- @ques signal 的更新原理？
+
+  - solidjs 源码
+  - 那个报错的原因
+
+- @ques `const doubledCount = () => 2 * count();` 是如何更新的
+
+```
+createEffect -> signal 怎么监听的 createEffect
+```
+
+```
+Updates | Effects
+结构
+node {
+    value,
+    observers: Owner[],
+    observerSlots: null,
+    comparato
+}
+Owner {
+    fn -> 外面绑定的函数
+    state,
+    updatedAt: null,
+    owned: null,
+    sources: null,
+    sourceSlots: null,
+    cleanups: null,
+    value: init,
+    owner: Owner,
+    context: null,
+    pure
+}
+
+
+
+调用
+writeSignal -> runUpdates -> completeUpdates
+    -> runUpdates
+        -> runUserEffects -> runTop -> updateComputation
+        -> runComputation
+
+createEffect -> createComputation(Owner) -> Owner.owned.push(e)
+
+
+```
 
 - @ques 对 h5 的支持
+
+- @ques 能不能抛出 PageContext 的功能 -> 这很有用
+
+- Effects | Owner | ...
+
+```
+(anonymous)	@	._src_wui_components…l_Modal.loop.tsx:89
+runComputation	@	vendors-node_modules…b61e99e5c7a70d3:843
+updateComputation	@	vendors-node_modules…b61e99e5c7a70d3:826
+runTop	@	vendors-node_modules…b61e99e5c7a70d3:937
+runQueue	@	vendors-node_modules…61e99e5c7a70d3:1011
+(anonymous)	@	vendors-node_modules…61e99e5c7a70d3:1006
+runUpdates	@	vendors-node_modules…b61e99e5c7a70d3:954
+completeUpdates	@	vendors-node_modules…61e99e5c7a70d3:1006
+runUpdates
+```
+
+- addModal(node()) 触发死循环
+
+- taro 微信 开发者工具 wxml 不更新
 
 - @ques taro merge request
 
@@ -73,6 +138,12 @@ reportRealtimeAction:fail not support
 - @ques setAlias 怎么处理
 
 ### end
+
+- @ques 弹框的支持
+
+  - 两个不同的页面引入一个 css 最后找不到 css 样式
+
+- @bug getOwner | runWithOwner | https://www.solidjs.com/docs/latest/api#createuniqueid
 
 - @ques `taro.getCurrentInstance()` 是在哪创建的
 

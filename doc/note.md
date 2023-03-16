@@ -9,6 +9,8 @@ https://github.com/solidjs/solid/issues/1617
 
 ## 2023-02-25 10:47:57
 
+- @ques solidjs 内部更新的逻辑 owner 树
+
 - @todo 搞清楚个部分的功能要做的事情。。。
 
   - 删除无用的东西
