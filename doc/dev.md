@@ -4,10 +4,19 @@
   - 那个报错的原因
 
 - @ques `const doubledCount = () => 2 * count();` 是如何更新的
+  - 看 solidjs-web 是如何更新的
 
-```
-createEffect -> signal 怎么监听的 createEffect
-```
+## 属性更新是如何设置的
+
+Object.getOwnPropertyDescriptors
+Object.keys(descriptors).filter(k => !blocked.has(k as keyof T)) as (keyof T)[]
+
+- @ques 如果 children 是个数组怎么处理
+
+- 注册
+  - insert2 -> createRenderEffect -> ...
+
+### createEffect 是如何更新的
 
 ```
 Updates | Effects
@@ -32,8 +41,6 @@ Owner {
     pure
 }
 
-
-
 调用
 writeSignal -> runUpdates -> completeUpdates
     -> runUpdates
@@ -41,7 +48,7 @@ writeSignal -> runUpdates -> completeUpdates
         -> runComputation
 
 createEffect -> createComputation(Owner) -> Owner.owned.push(e)
-
+    - updateComputation -> runComputation
 
 ```
 
@@ -62,8 +69,6 @@ runUpdates	@	vendors-node_modules…b61e99e5c7a70d3:954
 completeUpdates	@	vendors-node_modules…61e99e5c7a70d3:1006
 runUpdates
 ```
-
-- addModal(node()) 触发死循环
 
 - taro 微信 开发者工具 wxml 不更新
 
@@ -138,6 +143,8 @@ reportRealtimeAction:fail not support
 - @ques setAlias 怎么处理
 
 ### end
+
+- addModal(node()) 触发死循环
 
 - @ques 弹框的支持
 
@@ -277,7 +284,7 @@ insert(_el$, count)
 - base.wxml 是怎么生成的？
 
   - taro-webpack5-runner -> Prerender -> writeXML
-  - generateMiniFiles ->
+  - generateMiniFiles -> {}
   - `console.warn(`test:>generateTemplateFile`, filePath, compilation.assets['base.wxml'])`
   - ***
   - ？getDOMNode
