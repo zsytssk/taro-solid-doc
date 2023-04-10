@@ -29,15 +29,70 @@
 
   - ref
 
-- merge request
+- @ques merge request
 
-  - 能不能视频聊下？
+  - 这肯定有一大堆的问题
+  - @tarojs/plugin-framework-solid
+  - @tarojs/solid
+  - @tarojs/components + h5
+  - @tarojs/cli
+  - ... webpack-runner 等等
+  - framework solid
+  - 能不能本地跑起来 -> 这是关键
+  - 自动生成的模版
+  - 测试用例
 
 - @taro
 
   - hooks
 
 - @todo solidjs 要比 react 少 80k
+
+## 属性更新是如何设置的
+
+Object.getOwnPropertyDescriptors
+Object.keys(descriptors).filter(k => !blocked.has(k as keyof T)) as (keyof T)[]
+
+- @ques 如果 children 是个数组怎么处理
+
+- 注册
+  - insert2 -> createRenderEffect -> ...
+
+### createEffect 是如何更新的
+
+```
+Updates | Effects
+结构
+node {
+    value,
+    observers: Owner[],
+    observerSlots: null,
+    comparato
+}
+Owner {
+    fn -> 外面绑定的函数
+    state,
+    updatedAt: null,
+    owned: null,
+    sources: null,
+    sourceSlots: null,
+    cleanups: null,
+    value: init,
+    owner: Owner,
+    context: null,
+    pure
+}
+
+调用
+writeSignal -> runUpdates -> completeUpdates
+    -> runUpdates
+        -> runUserEffects -> runTop -> updateComputation
+        -> runComputation
+
+createEffect -> createComputation(Owner) -> Owner.owned.push(e)
+    - updateComputation -> runComputation
+
+```
 
 ## 2023-02-23 16:26:08
 

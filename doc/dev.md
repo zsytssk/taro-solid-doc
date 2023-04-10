@@ -1,74 +1,160 @@
-- @ques signal 的更新原理？
+- @todo 每一个包要能运行
+- @todo framework = solid
+- @ques 依赖的 solidjs 版本 `"^1.6.15"`
+- @ques 一个个包 commit
 
-  - solidjs 源码
-  - 那个报错的原因
+## merge request
 
-- @ques `const doubledCount = () => 2 * count();` 是如何更新的
-  - 看 solidjs-web 是如何更新的
+- @ques 修改的组件
 
-## 属性更新是如何设置的
+  - taro-cli -> @taro/cli
+  - taro-plugin-solid -> @tarojs/plugin-framework-solid
+  - taro-solid -> @tarojs/solid
+  - taro-helper -> @tarojs/helper
+  - taro-components -> @tarojs/components
+  - taro-components-solid -> @tarojs/components-solid
+  - taro-components-library-solid -> @tarojs/components-library-solid
+  - babel-preset-taro
 
-Object.getOwnPropertyDescriptors
-Object.keys(descriptors).filter(k => !blocked.has(k as keyof T)) as (keyof T)[]
+- @todo 替换组件
 
-- @ques 如果 children 是个数组怎么处理
+  - @tarojs/cli
+  - babel-preset-taro
+  - @tarojs/solid
+  - @tarojs/plugin-framework-solid
 
-- 注册
-  - insert2 -> createRenderEffect -> ...
+- @ques taro-components `dev:library-vue3` ？
 
-### createEffect 是如何更新的
+  - 怎么把 taro-components-library-solid 打包进去
 
-```
-Updates | Effects
-结构
-node {
-    value,
-    observers: Owner[],
-    observerSlots: null,
-    comparato
+- @ques taro-components-react 是用在 h5 上的吗？
+
+- @ques taro-components-library-solid | taro-components-solid
+
+- @ques 如何本地验证
+
+  - taro-cli 这一套全部跑完
+  - 在本地安装，然后将文件 copy 到 minapp-solid-test 中
+  - @ques `workspace:*` 本地依赖 如何处理
+
+- @todo 本地 example
+
+- @ques @taro/solid `__tests__` 怎么处理?
+
+- @todo 合并 commit
+
+- @todo taro-components-library-solid
+
+  - 能不能运行 -> 缺失 @taro/solid
+  - 安装其他的替代?
+
+- @ques 下面这段代码如何处理
+
+```ts
+if (props.hasOwnProperty("focus")) {
+  props.autoFocus = Boolean(props.focus);
+  delete props.focus;
 }
-Owner {
-    fn -> 外面绑定的函数
-    state,
-    updatedAt: null,
-    owned: null,
-    sources: null,
-    sourceSlots: null,
-    cleanups: null,
-    value: init,
-    owner: Owner,
-    context: null,
-    pure
-}
-
-调用
-writeSignal -> runUpdates -> completeUpdates
-    -> runUpdates
-        -> runUserEffects -> runTop -> updateComputation
-        -> runComputation
-
-createEffect -> createComputation(Owner) -> Owner.owned.push(e)
-    - updateComputation -> runComputation
-
 ```
 
-- @ques 对 h5 的支持
+- @ques 如何给 framework 添加 solid
+
+  - `plugin-framework-react` ?
+
+- @ques `taro-solid->rollup.config` `esmConfig` 是做什么的
+
+- @ques `h5` 的包要放在哪里？
+
+## end
+
+- @todo taro-cli
+
+  - `taro-cli/templates/default/types/global.d.ts` `@tarojs/components/types/index.vue3` -> 设置类型
+
+- `taro-cli/templates/default/package.json.tmpl`
+
+- @ques `packages/babel-preset-taro`
+
+- @todo `@tarojs/components/types/index.vue3` -> @tarojs/components/types/index.solid
+
+- @todo `@tarojs/components/types/index.solid`
+
+- @ques taro-components-react 是 h5 的组件吗
+
+  - 应该是 `@tarojs/plugin-platform-h5` 依赖的
+
+- @ques taroReactPlugin 能直接改成 taroSolidPlugin 吗
+
+  - 应该可以
+
+- @ques
+
+- @ques `api-loader.ts` 要做什么处理
+
+  - `taro-h5/dist/api/taro`是在什么地方引用的
+  - h5 库注入功能的
+  - 是怎么用的
+
+- @ques presets-taro 怎么处理
+
+- @ques taro preset -> babel-preset-taro -
+
+```ts
+[
+  "taro",
+  {
+    framework: "solid",
+    ts: true,
+  },
+];
+```
+
+## 2023-03-22 07:53:45
+
+- @ques 如何处理 选中 solid 只能选择 webpack5
+
+  - 也许我不需要做什么 试试 vue 就行了
+
+- `packages/taro-components-library-solid`
+
+- `packages/taro-components-library-solid/scripts/fix.js` 这个是做什么的
+
+  - 去改写打包之后的文件
+
+- @ques 问问官方 我现在现在项目怎么跑？
+
+- @ques 各个库的依赖关系
+
+  - `solid-js` `taro/solid`
+
+- @ques 各个库的 readme
+
+- @ques `packages/taro-components-solid` -> `rollup.config.js`
+
+- @ques 能不能找一个人来和我配合下
+
+- @ques solid createComponent 是怎么做的 onCleanUp?
+
+- @ques 我的是 3.5.5 版本， taro 更新到了 3.6.2 会不会有问题 ?
+
+- @ques 怎么 caifeng 项目之后能够运行起来？
+
+- @ques http://www.yckceo.com/d/IWAlW 这是什么书源
+
+- @ques taroReactPlugin 怎么处理
+- @ques h5 bug
+
+  - 无法 dev-server
+  - swiper 不停的更新
+  - 有些图片找不到
+
+- @ques useHtmlComponents
+
+- @ques ReferenceError: React is not defined
+
+- @ques 有没有加载 react-dom....
 
 - @ques 能不能抛出 PageContext 的功能 -> 这很有用
-
-- Effects | Owner | ...
-
-```
-(anonymous)	@	._src_wui_components…l_Modal.loop.tsx:89
-runComputation	@	vendors-node_modules…b61e99e5c7a70d3:843
-updateComputation	@	vendors-node_modules…b61e99e5c7a70d3:826
-runTop	@	vendors-node_modules…b61e99e5c7a70d3:937
-runQueue	@	vendors-node_modules…61e99e5c7a70d3:1011
-(anonymous)	@	vendors-node_modules…61e99e5c7a70d3:1006
-runUpdates	@	vendors-node_modules…b61e99e5c7a70d3:954
-completeUpdates	@	vendors-node_modules…61e99e5c7a70d3:1006
-runUpdates
-```
 
 - taro 微信 开发者工具 wxml 不更新
 
@@ -77,8 +163,6 @@ runUpdates
   - framework: 'react' 换成 solid -> 报错
   - webpack5 增加 framework solid 设置
   - taro/cli 添加模版
-
-- @ques @solid-refresh
 
 - @ques 易用性 solidjs api + hooks
 
@@ -143,6 +227,36 @@ reportRealtimeAction:fail not support
 - @ques setAlias 怎么处理
 
 ### end
+
+```ts
+function isES6() {
+  try {
+    new Proxy({}, {});
+    Object.getOwnPropertyDescriptors({});
+    return true;
+  } catch (exception) {
+    return false;
+  }
+}
+isES6();
+```
+
+- @ques solidjs 内部的机制 属性更新
+
+- components ?
+- taro-view-core
+- components/h5
+
+- @ques @solid-refresh
+
+- @ques signal 的更新原理？
+
+  - solidjs 源码
+  - 那个报错的原因
+
+- @ques `const doubledCount = () => 2 * count();` 是如何更新的
+
+  - 看 solidjs-web 是如何更新的
 
 - addModal(node()) 触发死循环
 

@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "synFile": "ts-node --project script/tsconfig.json --files script/main.ts"
+    "synFile": "ts-node --project script/tsconfig.json --files script/main.ts",
+    "synTaro": "ts-node --project script/tsconfig.json --files script/main.ts"
   },
   "dependencies": {
     "@babel/preset-env": "^7.20.2",

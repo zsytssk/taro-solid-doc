@@ -1,5 +1,6 @@
 https://github.com/NervJS/taro/issues/12834
 https://github.com/solidjs/solid/issues/1617
+
 了解 taro 在本地是怎么工作的
 
 - @ques taro 打包的流程是什么？webpack 的配置在哪
@@ -8,6 +9,10 @@ https://github.com/solidjs/solid/issues/1617
 在某个领域表现的最好
 
 ## 2023-02-25 10:47:57
+
+- @ques solid-js 1.7.3
+
+- @ques `eslintsimple-import-sort/imports`
 
 - @ques solidjs 内部更新的逻辑 owner 树
 
